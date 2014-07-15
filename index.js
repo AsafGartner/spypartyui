@@ -12,7 +12,7 @@ levelSelector = new LevelSelector([
       MISSIONS.SWAP,
     ],
     time: "3:30 Minutes",
-    imageUrl: "/images/beginner_ballroom.jpg",
+    imageUrl: IMAGE_DATA.beginner_ballroom
   },
   {
     name: "Ballroom",
@@ -29,7 +29,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "3:30 Minutes",
-    imageUrl: "/images/ballroom.jpg"
+    imageUrl: IMAGE_DATA.ballroom
   },
   {
     name: "Balcony",
@@ -43,7 +43,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "2:00 Minutes",
-    imageUrl: "/images/balcony.jpg"
+    imageUrl: IMAGE_DATA.balcony
   },
   {
     name: "Veranda",
@@ -60,7 +60,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "4:00 Minutes",
-    imageUrl: "/images/veranda.jpg"
+    imageUrl: IMAGE_DATA.veranda
   },
   {
     name: "Courtyard",
@@ -76,7 +76,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "3:00 Minutes",
-    imageUrl: "/images/courtyard.jpg"
+    imageUrl: IMAGE_DATA.courtyard
   },
   {
     name: "Courtyard2",
@@ -92,7 +92,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "3:00 Minutes",
-    imageUrl: "/images/courtyard2.jpg"
+    imageUrl: IMAGE_DATA.courtyard2
   },
   {
     name: "Panopticon",
@@ -109,7 +109,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "4:00 Minutes",
-    imageUrl: "/images/panopticon.jpg"
+    imageUrl: IMAGE_DATA.panopticon
   },
   {
     name: "Gallery",
@@ -126,7 +126,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "3:30 Minutes",
-    imageUrl: "/images/gallery.jpg"
+    imageUrl: IMAGE_DATA.gallery
   },
   {
     name: "High-rise",
@@ -143,7 +143,7 @@ levelSelector = new LevelSelector([
       MISSIONS.FINGERPRINT
     ],
     time: "3:30 Minutes",
-    imageUrl: "/images/highrise.jpg"
+    imageUrl: IMAGE_DATA.highrise
   },
   {
     name: "Modern",
@@ -155,7 +155,7 @@ levelSelector = new LevelSelector([
       MISSIONS.SEDUCE,
     ],
     time: "3:00 Minutes",
-    imageUrl: "/images/modern.jpg"
+    imageUrl: IMAGE_DATA.modern
   },
 ], uiContainer.offsetWidth, function(level) {
   console.log(level.name + " selected");

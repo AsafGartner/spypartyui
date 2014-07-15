@@ -107,7 +107,7 @@ LevelSelector.prototype.render = function() {
   if (numLevels % 2 == 0) numLevels--;
   for (var i = -Math.floor(numLevels/2); i <= Math.floor(numLevels/2); ++i) {
     var currentLevel = this.levels[this.getLevelIndex(centerIdx + i)];
-    levelElement = this.createLevelElement(currentLevel);
+    var levelElement = this.createLevelElement(currentLevel);
     var leftPosition = -this.currentPosition + (centerIdx + i)*this.levelWidth + (this.width/2 - this.levelWidth/2);
     levelElement.style.left = leftPosition;
     levelElement.style.boxShadow = this.getBoxShadow(leftPosition);
