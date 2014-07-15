@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <script src="input.js"></script>
+    <script src="level_selector.js"></script>
+    <style>
+      body {
+      }
+
+      .ui_container {
+        background: radial-gradient(ellipse, #202020, #080008 200%);
+        width: 1280;
+        height: 720;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .level_selector {
+        position: absolute;
+        left: 0;
+        bottom: 10px;
+        overflow: hidden;
+        height: 360px;
+        width: 100%;
+        white-space: nowrap;
+      }
+
+      .level_selector .level {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        margin: 0 10px;
+      }
+
+      .level_selector .level img {
+        width: 740px;
+        height: 360px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui_container"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
