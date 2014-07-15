@@ -2,6 +2,7 @@ window.Input = function(inputEventCallback) {
   this.callback = inputEventCallback;
 
   window.addEventListener("keydown", this.onKeyPressed.bind(this));
+  window.addEventListener("mousewheel", this.onMouseWheel.bind(this));
 };
 
 Input.prototype.onKeyPressed = function(event) {
@@ -21,5 +22,13 @@ Input.prototype.onKeyPressed = function(event) {
     case 13:
       this.callback("select");
       break;
+  }
+};
+
+Input.prototype.onMouseWheel = function(event) {
+  if (event.wheelDeltaY > 0) {
+    this.callback("up");
+  } else if (event.wheelDeltaY < 0) {
+    this.callback("down");
   }
 };

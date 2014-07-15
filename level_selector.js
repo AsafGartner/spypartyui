@@ -1,4 +1,6 @@
-window.LevelSelector = function(levels, width) {
+// levels is an array of { imageUrl: "url", name: "name", numGuests: 10, time: "3 Minutes", missions: ["mission1", "mission2"] }
+window.LevelSelector = function(levels, width, clickCallback) {
+  this.clickCallback = clickCallback;
   this.width = width;
   this.levels = levels;
   this.element = document.createElement("div");
@@ -11,11 +13,33 @@ window.LevelSelector = function(levels, width) {
 };
 
 LevelSelector.prototype.createLevelElement = function(level) {
-  levelElement = document.createElement("div");
+  var levelElement = document.createElement("div");
   levelElement.classList.add("level");
-  image = document.createElement("img");
+
+  var image = document.createElement("img");
   image.src = level.imageUrl;
   levelElement.appendChild(image);
+
+  var textContainer = document.createElement("div");
+  textContainer.classList.add("level_text_container");
+
+  var name = document.createElement("div");
+  name.classList.add("level_name");
+  name.innerHTML = level.name;
+  textContainer.appendChild(name);
+
+  var description = document.createElement("div");
+  description.classList.add("level_description");
+  description.innerHTML = level.description;
+  textContainer.appendChild(description);
+
+  var details = document.createElement("div");
+  details.classList.add("level_details");
+  details.innerHTML = level.numGuests + " Guests, " + level.missions.length + " Missions, " + level.time;
+  textContainer.appendChild(details);
+
+  levelElement.appendChild(textContainer);
+
   return levelElement;
 };
 
@@ -66,13 +90,26 @@ LevelSelector.prototype.updateScrollPosition = function() {
 };
 
 LevelSelector.prototype.render = function() {
+  var that = this;
   this.element.innerHTML = ""; // clear previous frame
   var centerIdx = this.indexForScrollPosition(this.currentPosition);
   var numLevels = Math.ceil(this.width / this.levelWidth) + 2;
   if (numLevels % 2 == 0) numLevels--;
   for (var i = -Math.floor(numLevels/2); i <= Math.floor(numLevels/2); ++i) {
-    levelElement = this.createLevelElement(this.levels[this.getLevelIndex(centerIdx + i)]);
-    levelElement.style.left = -this.currentPosition + (centerIdx + i)*this.levelWidth + (this.width/2 - this.levelWidth/2);
+    var currentLevel = this.levels[this.getLevelIndex(centerIdx + i)];
+    levelElement = this.createLevelElement(currentLevel);
+    var leftPosition = -this.currentPosition + (centerIdx + i)*this.levelWidth + (this.width/2 - this.levelWidth/2);
+    levelElement.style.left = leftPosition;
+    levelElement.style.boxShadow = this.getBoxShadow(leftPosition);
+    levelElement.addEventListener("click", (function(level) {
+      return function() { that.clickCallback(level); }
+    })(currentLevel));
     this.element.appendChild(levelElement);
   }
+};
+
+LevelSelector.prototype.getBoxShadow = function(position) {
+  var centerPos = this.width/2 - this.levelWidth/2;
+  var value = ((this.levelWidth - Math.abs(centerPos - position)) / this.levelWidth) * 35;
+  return "#f3fd8f 0px 0px " + value + "px -5px";
 };

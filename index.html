@@ -1,25 +1,48 @@
 <html>
   <head>
+    <script src="missions.js"></script>
     <script src="input.js"></script>
     <script src="level_selector.js"></script>
     <style>
+      @font-face {
+        font-family: "agencyfb";
+        src: url("/fonts/agencyfb.ttf");
+      }
+
       body {
+        font-family: "agencyfb";
+        background-color: darkgrey;
+      }
+
+      .notes {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 25px;
+      }
+
+      .notes h1 {
+        margin: 0;
+      }
+
+      .notes ul {
+        margin-top: 0;
       }
 
       .ui_container {
-        background: radial-gradient(ellipse, #202020, #080008 200%);
+        background: radial-gradient(ellipse, #404040, #080008);
         width: 1280;
         height: 720;
         overflow: hidden;
         position: relative;
+        display: inline-block;
+        vertical-align: top;
       }
 
       .level_selector {
         position: absolute;
         left: 0;
         bottom: 10px;
-        overflow: hidden;
-        height: 360px;
+        height: 370px;
         width: 100%;
         white-space: nowrap;
       }
@@ -30,16 +53,43 @@
         left: 0;
         display: inline-block;
         margin: 0 10px;
+        width: 740px;
+        height: 370px;
       }
 
       .level_selector .level img {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 740px;
-        height: 360px;
+        height: 370px;
+      }
+
+      .level_selector .level .level_text_container {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        width: 740px;
+        text-align: center;
+        color: #f3fd8f;
+        text-shadow: black 1px 1px 3px;
+        font-size: 25px;
+      }
+
+      .level_selector .level .level_text_container .level_name {
+        font-size: 60px;
+        font-weight: bold;
       }
     </style>
   </head>
   <body>
     <div class="ui_container"></div>
+    <div class="notes">
+      <h1>Notes:</h1>
+      <ul>
+        <li>Yay</li>
+      </ul>
+    </div>
     <script src="index.js"></script>
   </body>
 </html>
