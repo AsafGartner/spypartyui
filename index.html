@@ -24,8 +24,27 @@
         margin: 0;
       }
 
+      .notes h2 {
+        margin: 0 0 0 20px;
+        font-size: 30px;
+      }
+
       .notes ul {
         margin-top: 0;
+        margin-left: 20px;
+        padding-left: 25px;
+      }
+
+      .attributions h1 {
+        margin: 0;
+      }
+
+      .attributions h2 {
+        margin: 0 0 0 20px;
+      }
+
+      .attributions ul {
+        margin-top: 5px;
       }
 
       .ui_container {
@@ -80,14 +99,69 @@
         font-size: 60px;
         font-weight: bold;
       }
+
+      .level_selector .level .mission {
+        width: 40px;
+        height: 40px;
+        margin: 0 5px;
+        background: url("/images/missions.png") scroll no-repeat 0 0 transparent;
+        display: inline-block;
+      }
+
+      .level_selector .level .mission.bug {
+        background-position: 0px 0px;
+      }
+
+      .level_selector .level .mission.contact {
+        background-position: -40px 0px;
+      }
+
+      .level_selector .level .mission.transfer {
+        background-position: -280px 0px;
+      }
+
+      .level_selector .level .mission.swap {
+        background-position: -200px 0px;
+      }
+
+      .level_selector .level .mission.inspect {
+        background-position: -240px 0px;
+      }
+
+      .level_selector .level .mission.seduce {
+        background-position: -160px 0px;
+      }
+
+      .level_selector .level .mission.purloin {
+        background-position: -120px 0px;
+      }
+
+      .level_selector .level .mission.fingerprint {
+        background-position: -80px 0px;
+      }
     </style>
   </head>
   <body>
     <div class="ui_container"></div>
     <div class="notes">
       <h1>Notes:</h1>
+      <h2>Level selection:</h2>
       <ul>
-        <li>Yay</li>
+        <li>Icons indicate possible mission types for each map.</li>
+      </ul>
+    </div>
+    <div class="attributions">
+      <h1>Attributions:</h1>
+      <h2>Mission icons from <a href="http://thenounproject.com">The Noun Project</a>:</h2>
+      <ul>
+        <li><b>Bug Ambassador</b> icon by <a href="http://thenounproject.com/cezarylopacinski">Cezary Lopacinski</a></li>
+        <li><b>Contact Double Agent</b> icon by <a href="http://thenounproject.com/tallhat">Chris Dawson</a></li>
+        <li><b>Transfer Microfilm</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
+        <li><b>Swap Statue</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
+        <li><b>Inspect 3 Statues</b> icon by <a href="http://thenounproject.com/Simon%20Child">Simon Child</a></li>
+        <li><b>Seduce Target</b> icon by <a href="http://thenounproject.com/SimpleIcons">Simple Icons</a></li>
+        <li><b>Purloin Guest List</b> icon by <a href="http://thenounproject.com/gianni_dolce">Gianni</a></li>
+        <li><b>Fingerprint Ambassador</b> icon by <a href="http://thenounproject.com/diegonaive">Diego Naive</a></li>
       </ul>
     </div>
     <script src="index.js"></script>

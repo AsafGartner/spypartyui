@@ -28,6 +28,13 @@ LevelSelector.prototype.createLevelElement = function(level) {
   name.innerHTML = level.name;
   textContainer.appendChild(name);
 
+  for (var i = 0; i < level.missions.length; ++i) {
+    var mission = document.createElement("div");
+    mission.classList.add("mission");
+    mission.classList.add(MISSIONS_REVERSE[level.missions[i]]);
+    textContainer.appendChild(mission);
+  }
+
   var description = document.createElement("div");
   description.classList.add("level_description");
   description.innerHTML = level.description;
