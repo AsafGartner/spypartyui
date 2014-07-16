@@ -167,11 +167,11 @@ inputHandler = new Input(function(input) {
   switch (input) {
     case "left":
     case "up":
-      levelSelector.scrollPrev();
+      levelSelector.prev();
       break;
     case "right":
     case "down":
-      levelSelector.scrollNext();
+      levelSelector.next();
       break;
     case "select":
       break;
