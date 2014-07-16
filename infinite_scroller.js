@@ -80,6 +80,9 @@ InfiniteScroller.prototype.renderItems = function() {
     var leftPosition = -this.currentPosition + currentIndex*this.itemWidth + (this.scrollerWidth/2 - this.itemWidth/2);
     var itemElement = this.dataSource.getItemElement(this.getItemIndex(currentIndex), this.distanceFromCenter(leftPosition));
     itemElement.classList.add("infinite_scroller_item");
+    if (i == 0) {
+      itemElement.classList.add("current_item");
+    }
     itemElement.style.left = leftPosition + "px";
     itemElement.addEventListener("click", this.setSelectionIndex.bind(this, currentIndex));
     this.element.appendChild(itemElement);

@@ -4,6 +4,7 @@
     <script src="image_data.js"></script>
     <script src="missions.js"></script>
     <script src="input.js"></script>
+    <script src="character_selector.js"></script>
     <script src="level_selector.js"></script>
     <style>
       @font-face {
@@ -162,16 +163,90 @@
       .level_selector .level .mission.fingerprint {
         background-position: -80px 0px;
       }
+
+      .character_selector {
+        position: relative;
+        text-align: center;
+        color: #f3fd8f;
+        text-shadow: black 1px 1px 3px;
+        font-size: 60px;
+        height: 180px;
+      }
+
+      .character_selector.active .text_container {
+        top: 0;
+      }
+
+      .character_selector.active .characters_container {
+        top: 170px;
+      }
+
+      .character_selector.active .character_item {
+        opacity: 1;
+      }
+
+      .character_selector .text_container {
+        position: absolute;
+        top: 85px;
+        left: 0;
+        height: 170px;
+        width: 100%;
+        transition: top 0.5s ease-in-out;
+      }
+
+      .character_selector .text_container .character_role {
+        position: absolute;
+        top: 0;
+        left: 25px;
+        line-height: 170px;
+      }
+
+      .character_selector .text_container .mission_text_container {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        line-height: 170px;
+        text-align: right;
+      }
+
+      .character_selector .characters_container {
+        position: absolute;
+        top: 85px;
+        left: 0;
+        width: 100%;
+        transition: top 0.5s ease-in-out;
+      }
+
+      .character_selector .characters_container .reticle {
+        border: 5px solid #f3fd8f;
+        border-radius: 10px;
+        width: 110px;
+        height: 160px;
+        display: inline-block;
+        z-index: 10;
+        position: relative;
+      }
+
+      .character_selector .characters_container .infinite_scroller {
+        position: absolute;
+        top: 0;
+      }
+
+      .character_selector .character_item {
+        margin: 10px;
+        transition: opacity 0.5s;
+        opacity: 0;
+      }
+
+      .character_selector .character_item.current_item {
+        opacity: 1;
+      }
     </style>
   </head>
   <body>
     <div class="ui_container"></div>
     <div class="notes">
       <h1>Notes:</h1>
-      <h2>Level Selection:</h2>
-      <ul>
-        <li>Icons indicate possible mission types for each map.</li>
-      </ul>
       <h2>Source Code:</h2>
       <p><a href="http://github.com/AsafGartner/spypartyui">AsafGartner/spypartyui on GitHub</a></p>
     </div>
