@@ -38,15 +38,18 @@ CharacterSelector.prototype.getSelectedCharacter = function() {
   return this.characters[this.infiniteScroller.getSelectedItemIndex()];
 };
 
-CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter) {
-  var character = this.characters[index];
+CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter, existingElement) {
+  var element = existingElement;
+  if (!element) {
+    var character = this.characters[index];
 
-  var element = document.createElement("div");
-  element.classList.add("character_item");
+    var element = document.createElement("div");
+    element.classList.add("character_item");
 
-  var image = document.createElement("img");
-  image.src = character.imageUrl;
-  element.appendChild(image);
+    var image = document.createElement("img");
+    image.src = character.imageUrl;
+    element.appendChild(image);
+  }
 
   element.style.opacity = -(distanceFromCenter/5)+1;
   return element;

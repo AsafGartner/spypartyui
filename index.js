@@ -1,31 +1,63 @@
 var uiContainer = document.querySelector(".ui_container");
 
-levelSelector = new LevelSelector(levels, uiContainer.offsetWidth, function() {});
+levelSelector = new LevelSelector(levels, uiContainer.offsetWidth, function() { });
+missionSelectScreen = new MissionSelectScreen(levels, uiContainer.offsetWidth, function() {});
 characterSelectScreen = new CharacterSelectScreen(characters, function() {});
+waitingForSniperScreen = new WaitingForSniperScreen();
 
 uiContainer.appendChild(levelSelector.getElement());
+uiContainer.appendChild(missionSelectScreen.getElement());
 uiContainer.appendChild(characterSelectScreen.getElement());
+uiContainer.appendChild(waitingForSniperScreen.getElement());
+
+onLevelSelectorFinished = function() {
+  missionSelectScreen.setLevel(levelSelector.getCurrentLevel());
+};
+onMissionSelectorFinished = function() {
+};
+onCharacterSelectorFinished = function() {
+};
 
 screens = [
   levelSelector,
-  characterSelectScreen
+  missionSelectScreen,
+  characterSelectScreen,
+  waitingForSniperScreen
+]
+
+onScreenFinishedCallbacks = [
+  onLevelSelectorFinished,
+  onMissionSelectorFinished,
+  onCharacterSelectorFinished
 ]
 
 currentScreen = null;
 
-setCurrentScreen(0);
+missionSelectScreen.setLevel(levels[9]);
+setCurrentScreen(1);
 
-inputHandler = new Input(function(input) {
-  if (input == "select") {
-    if (currentScreenIndex < screens.length - 1) {
-      setCurrentScreen(currentScreenIndex + 1);
+document.querySelector(".previous_screen").addEventListener("click", function() {
+  prevScreen();
+});
+
+document.querySelector(".next_screen").addEventListener("click", function() {
+  nextScreen();
+});
+
+inputHandler = new Input(function(input, event) {
+  var preventDefault = false;
+  if (currentScreen.handleInput) {
+    preventDefault = currentScreen.handleInput(input, event);
+  }
+  if (!preventDefault) {
+    switch (input) {
+      case "select":
+        nextScreen();
+        break;
+      case "back":
+        prevScreen();
+        break;
     }
-  } else if (input == "back") {
-    if (currentScreenIndex > 0) {
-      setCurrentScreen(currentScreenIndex - 1);
-    }
-  } else {
-    currentScreen.handleInput(input);
   }
 });
 
@@ -36,4 +68,33 @@ function setCurrentScreen(index) {
   }
   currentScreen = screens[currentScreenIndex];
   currentScreen.getElement().classList.add("show");
+  if (currentScreenIndex < screens.length - 1) {
+    document.querySelector(".next_screen").style.display = "block";
+  } else {
+    document.querySelector(".next_screen").style.display = "none";
+  }
+
+  if (currentScreenIndex > 0) {
+    document.querySelector(".previous_screen").style.display = "block";
+  } else {
+    document.querySelector(".previous_screen").style.display = "none";
+  }
+}
+
+function nextScreen() {
+  var valid = true;
+  if (currentScreen.validate) {
+    valid = currentScreen.validate();
+  }
+
+  if (valid && currentScreenIndex < screens.length - 1) {
+    onScreenFinishedCallbacks[currentScreenIndex]();
+    setCurrentScreen(currentScreenIndex + 1);
+  }
+}
+
+function prevScreen() {
+  if (currentScreenIndex > 0) {
+    setCurrentScreen(currentScreenIndex - 1);
+  }
 }

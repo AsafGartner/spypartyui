@@ -82,5 +82,17 @@ CharacterSelectScreen.prototype.handleInput = function(input) {
     case "down":
       this.nextSelector();
       break;
+    case "select":
+      if (this.activeSelectorIndex < this.selectors.length-1) {
+        this.nextSelector();
+        return true;
+      }
+      break;
+    case "back":
+      if (this.activeSelectorIndex > 0) {
+        this.prevSelector();
+        return true;
+      }
+      break;
   }
 }

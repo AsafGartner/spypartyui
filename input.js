@@ -3,6 +3,7 @@ window.Input = function(inputEventCallback) {
 
   window.addEventListener("keydown", this.onKeyPressed.bind(this));
   window.addEventListener("mousewheel", this.onMouseWheel.bind(this));
+  // TODO: add gamepad support
 };
 
 Input.prototype.onKeyPressed = function(event) {
@@ -25,6 +26,10 @@ Input.prototype.onKeyPressed = function(event) {
     case 8:
     case 27:
       this.callback("back");
+      break;
+
+    default:
+      this.callback("keyboard", event);
       break;
   }
 };

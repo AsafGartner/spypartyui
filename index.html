@@ -6,9 +6,12 @@
     <script src="characters.js"></script>
     <script src="infinite_scroller.js"></script>
     <script src="input.js"></script>
+    <script src="level_element.js"></script>
+    <script src="level_selector.js"></script>
+    <script src="mission_select_screen.js"></script>
     <script src="character_selector.js"></script>
     <script src="character_select_screen.js"></script>
-    <script src="level_selector.js"></script>
+    <script src="waiting_for_sniper_screen.js"></script>
     <style>
       @font-face {
         font-family: "agencyfb";
@@ -45,6 +48,10 @@
         margin: 0 0 0 20px;
       }
 
+      .attributions {
+        margin-top: 60px;
+      }
+
       .attributions h1 {
         margin: 0;
       }
@@ -67,9 +74,31 @@
         vertical-align: top;
       }
 
+      .ui_container .next_screen {
+        color: #f3fd8f;
+        font-size: 30px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        text-decoration: none;
+        z-index: 1000;
+      }
+
+      .ui_container .previous_screen {
+        color: #f3fd8f;
+        font-size: 30px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 5px;
+        left: 10px;
+        text-decoration: none;
+        z-index: 1000;
+      }
+
       .ui_container > div {
         opacity: 0;
-        transition: opacity 0.5s ease-in-out;
+        transition: opacity 0.2s ease-in-out;
         position: absolute;
         top: 0;
         left: 0;
@@ -79,6 +108,7 @@
 
       .ui_container > div.show {
         opacity: 1;
+        z-index: 100;
       }
 
       .infinite_scroller {
@@ -88,7 +118,7 @@
       }
 
       .infinite_scroller_item {
-        position: absolute;
+        position: absolute !important;
         top: 0;
       }
 
@@ -98,53 +128,53 @@
       .level_selector .infinite_scroller {
         position: absolute;
         left: 0;
-        bottom: 10px;
+        bottom: 40px;
         height: 370px;
         width: 100%;
       }
 
-      .level_selector .level {
+      .level {
         width: 740px;
         height: 370px;
+        position: relative;
       }
 
-      .level_selector .level img {
+      .level img {
         position: absolute;
         top: 0;
         left: 0;
-        width: 740px;
-        height: 370px;
+        width: 100%;
+        height: 100%;
       }
 
-      .level_selector .level .level_text_container {
+      .level .level_text_container {
         position: absolute;
         bottom: 10px;
         left: 0;
-        width: 740px;
+        width: 100%;
         text-align: center;
         color: #f3fd8f;
         text-shadow: black 1px 1px 3px;
         font-size: 25px;
       }
 
-      .level_selector .level .level_text_container .level_name {
+      .level .level_text_container .level_name {
         font-size: 60px;
         font-weight: bold;
       }
 
-      .level_selector .level .level_text_container .level_description {
-        width: 600px;
+      .level .level_text_container .level_description {
         white-space: normal;
         margin: 0 auto;
+        padding: 0 50px;
       }
 
-      .level_selector .level .missions_container {
-        width: 100%;
-        height: 40px;
+      .level .missions_container {
         text-align: center;
+        padding: 0 50px;
       }
 
-      .level_selector .level .mission {
+      .level .mission {
         width: 40px;
         height: 40px;
         margin: 0 5px;
@@ -152,36 +182,86 @@
         display: inline-block;
       }
 
-      .level_selector .level .mission.bug {
+      .level .mission.bug {
         background-position: 0px 0px;
       }
 
-      .level_selector .level .mission.contact {
+      .level .mission.contact {
         background-position: -40px 0px;
       }
 
-      .level_selector .level .mission.transfer {
+      .level .mission.transfer {
         background-position: -280px 0px;
       }
 
-      .level_selector .level .mission.swap {
+      .level .mission.swap {
         background-position: -200px 0px;
       }
 
-      .level_selector .level .mission.inspect {
+      .level .mission.inspect {
         background-position: -240px 0px;
       }
 
-      .level_selector .level .mission.seduce {
+      .level .mission.seduce {
         background-position: -160px 0px;
       }
 
-      .level_selector .level .mission.purloin {
+      .level .mission.purloin {
         background-position: -120px 0px;
       }
 
-      .level_selector .level .mission.fingerprint {
+      .level .mission.fingerprint {
         background-position: -80px 0px;
+      }
+
+      .mission_select_screen {
+        color: #f3fd8f;
+      }
+
+      .mission_select_screen .mission_select_container {
+        width: 680px;
+        margin: 0 auto;
+      }
+
+      .mission_select_screen .game_type_container {
+        position: absolute;
+        bottom: 270px;
+        width: 380px;
+        padding: 15px 30px;
+      }
+
+      .mission_select_screen .game_type_container .game_type {
+        text-align: center;
+        margin-bottom: 5px;
+        font-size: 35px;
+        font-weight: bold;
+      }
+
+      .mission_select_screen .game_type_container .game_type_description {
+        font-size: 20px;
+      }
+
+      .mission_select_container .level_container {
+        position: absolute;
+        bottom: 50px;
+      }
+
+      .mission_select_screen .level {
+        width: 440px;
+        height: 220px;
+        box-shadow: #1b1f3a 0 0 3px 1px;
+      }
+
+      .mission_select_screen .level .level_text_container {
+        bottom: 3px;
+      }
+
+      .mission_select_screen .level .level_name {
+        font-size: 30px;
+      }
+
+      .mission_select_screen .level .level_details {
+        font-size: 20px;
       }
 
       .character_selector {
@@ -202,6 +282,7 @@
         width: 100%;
         transition: top 0.5s ease-in-out;
         z-index: 20;
+        pointer-events: none;
       }
 
       .character_selector .text_container .character_role {
@@ -249,39 +330,48 @@
 
       .character_selector .character_item {
         margin: 10px;
-        transition: opacity 0.5s;
-        opacity: 0;
         width: 100px;
         height: 100px;
         overflow: hidden;
       }
 
-      .character_selector .character_item.current_item {
-        opacity: 1;
+      .waiting_for_sniper_screen {
+        text-align: center;
+        color: #f3fd8f;
+        text-shadow: black 1px 1px 2px;
+        font-size: 60px;
+        padding-top: 100px;
       }
     </style>
   </head>
   <body>
-    <div class="ui_container"></div>
+    <div class="ui_container">
+      <a class="previous_screen" href="javascript:;">Previous</a>
+      <a class="next_screen" href="javascript:;">Next</a>
+    </div>
     <div class="notes">
       <h1>Notes:</h1>
+      <h2>Level Select:</h2>
+      <ul>
+        <li>Use number keys to jump to specific levels</li>
+      </ul>
       <h2>Source Code:</h2>
       <p><a href="http://github.com/AsafGartner/spypartyui">AsafGartner/spypartyui on GitHub</a></p>
-    </div>
-    <div class="attributions">
-      <h1>Attributions:</h1>
-      <h2>Mission icons from <a href="http://thenounproject.com">The Noun Project</a>:</h2>
-      <ul>
-        <li><b>Bug Ambassador</b> icon by <a href="http://thenounproject.com/cezarylopacinski">Cezary Lopacinski</a></li>
-        <li><b>Contact Double Agent</b> icon by <a href="http://thenounproject.com/tallhat">Chris Dawson</a></li>
-        <li><b>Transfer Microfilm</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
-        <li><b>Swap Statue</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
-        <li><b>Inspect 3 Statues</b> icon by <a href="http://thenounproject.com/Simon%20Child">Simon Child</a></li>
-        <li><b>Seduce Target</b> icon by <a href="http://thenounproject.com/SimpleIcons">Simple Icons</a></li>
-        <li><b>Purloin Guest List</b> icon by <a href="http://thenounproject.com/gianni_dolce">Gianni</a></li>
-        <li><b>Fingerprint Ambassador</b> icon by <a href="http://thenounproject.com/diegonaive">Diego Naive</a></li>
-      </ul>
-      <h2>All other assets from <a href="http://spyparty.com">SpyParty</a></h2>
+      <div class="attributions">
+        <h1>Attributions:</h1>
+        <h2>Mission icons from <a href="http://thenounproject.com">The Noun Project</a>:</h2>
+        <ul>
+          <li><b>Bug Ambassador</b> icon by <a href="http://thenounproject.com/cezarylopacinski">Cezary Lopacinski</a></li>
+          <li><b>Contact Double Agent</b> icon by <a href="http://thenounproject.com/tallhat">Chris Dawson</a></li>
+          <li><b>Transfer Microfilm</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
+          <li><b>Swap Statue</b> icon by <a href="http://thenounproject.com/DmitryBaranovskiy">Dmitry Baranovskiy</a></li>
+          <li><b>Inspect 3 Statues</b> icon by <a href="http://thenounproject.com/Simon%20Child">Simon Child</a></li>
+          <li><b>Seduce Target</b> icon by <a href="http://thenounproject.com/SimpleIcons">Simple Icons</a></li>
+          <li><b>Purloin Guest List</b> icon by <a href="http://thenounproject.com/gianni_dolce">Gianni</a></li>
+          <li><b>Fingerprint Ambassador</b> icon by <a href="http://thenounproject.com/diegonaive">Diego Naive</a></li>
+        </ul>
+        <h2>All other assets from <a href="http://spyparty.com">SpyParty</a></h2>
+      </div>
     </div>
     <script src="index.js"></script>
   </body>

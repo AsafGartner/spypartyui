@@ -25,14 +25,14 @@ characters = [
     imageUrl: IMAGE_DATA.ms_e
   },
   {
-    name: "Mr. F",
-    gender: "male",
-    imageUrl: IMAGE_DATA.mr_f
+    name: "Ms. F",
+    gender: "female",
+    imageUrl: IMAGE_DATA.ms_f
   },
   {
-    name: "Ms. G",
-    gender: "female",
-    imageUrl: IMAGE_DATA.ms_g
+    name: "Mr. G",
+    gender: "male",
+    imageUrl: IMAGE_DATA.mr_g
   },
   {
     name: "Ms. H",
