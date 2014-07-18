@@ -11,34 +11,31 @@ function CharacterSelector(characters, role, missionTextLines, width, characterS
   this.element = document.createElement("div");
   this.element.classList.add("character_selector");
   this.renderElement();
-
-  this.active = false;
+  this.setMissionGender(this.characters[0].gender);
 }
 
 CharacterSelector.prototype.getElement = function() {
   return this.element;
 };
 
+CharacterSelector.prototype.next = function() {
+  this.infiniteScroller.next();
+};
+
+CharacterSelector.prototype.prev = function() {
+  this.infiniteScroller.prev();
+};
+
 CharacterSelector.prototype.activate = function() {
-  this.active = true;
   this.element.classList.add("active");
 };
 
 CharacterSelector.prototype.deactivate = function() {
-  this.active = false;
   this.element.classList.remove("active");
 };
 
-CharacterSelector.prototype.next = function() {
-  if (this.active) {
-    this.infiniteScroller.next();
-  }
-};
-
-CharacterSelector.prototype.prev = function() {
-  if (this.active) {
-    this.infiniteScroller.prev();
-  }
+CharacterSelector.prototype.getSelectedCharacter = function() {
+  return this.characters[this.infiniteScroller.getSelectedItemIndex()];
 };
 
 CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter) {
@@ -51,10 +48,12 @@ CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter)
   image.src = character.imageUrl;
   element.appendChild(image);
 
+  element.style.opacity = -(distanceFromCenter/5)+1;
   return element;
 };
 
 CharacterSelector.prototype.onCharacterSelected = function(index) {
+  this.setMissionGender(this.characters[index].gender);
   this.characterSelectedCallback(this.characters[index]);
 };
 
@@ -92,3 +91,18 @@ CharacterSelector.prototype.renderElement = function() {
 
   this.element.appendChild(charactersContainer);
 };
+
+CharacterSelector.prototype.setMissionGender = function(gender) {
+  var text = "";
+  if (gender == "male") {
+    text = "Him";
+  } else if (gender == "female") {
+    text = "Her";
+  }
+
+  missionTextElements = this.element.querySelectorAll(".mission_text");
+  for (var i = 0; i < missionTextElements.length; ++i) {
+    var el = missionTextElements[i];
+    el.innerHTML = el.innerHTML.replace(/Him|Her/, text);
+  }
+}

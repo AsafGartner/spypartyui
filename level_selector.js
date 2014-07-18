@@ -20,6 +20,19 @@ LevelSelector.prototype.prev = function() {
   this.infiniteScroller.prev();
 };
 
+LevelSelector.prototype.handleInput = function(input) {
+  switch (input) {
+    case "left":
+    case "up":
+      this.prev();
+      break;
+    case "right":
+    case "down":
+      this.next();
+      break;
+  }
+}
+
 LevelSelector.prototype.getItemElement = function(index, distanceFromCenter) {
   var level = this.levels[index];
 
@@ -60,7 +73,7 @@ LevelSelector.prototype.getItemElement = function(index, distanceFromCenter) {
 
   levelElement.appendChild(textContainer);
 
-  levelElement.style.boxShadow = "#f3fd8f 0px 0px " + (35 * distanceFromCenter) + "px -5px";
+  levelElement.style.boxShadow = "#f3fd8f 0px 0px " + (35 * (1-distanceFromCenter)) + "px -5px";
 
   return levelElement;
 };

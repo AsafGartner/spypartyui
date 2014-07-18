@@ -22,6 +22,10 @@ Input.prototype.onKeyPressed = function(event) {
     case 13:
       this.callback("select");
       break;
+    case 8:
+    case 27:
+      this.callback("back");
+      break;
   }
 };
 

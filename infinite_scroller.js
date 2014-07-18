@@ -4,7 +4,7 @@
  * dataSource: {
  *   length: integer - number of different items in the dataSource
  *   getItemElement: function(index, distanceFromCenter) - must return an html element that represents the item at index [0...dataSource.length)
- *                                                         distanceFromCenter is between [0..1] and represents how close the item is to the center
+ *                                                         distanceFromCenter represents how far the item is from the center in itemWidth units
  * }
  */
 function InfiniteScroller(selectionChangedCallback, dataSource, scrollerWidth, itemWidth) {
@@ -91,5 +91,5 @@ InfiniteScroller.prototype.renderItems = function() {
 
 InfiniteScroller.prototype.distanceFromCenter = function(position) {
   var centerPos = this.scrollerWidth/2 - this.itemWidth/2;
-  return ((this.itemWidth - Math.abs(centerPos - position)) / this.itemWidth);
+  return (Math.abs(centerPos - position) / this.itemWidth);
 }
