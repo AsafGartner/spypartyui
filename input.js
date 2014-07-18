@@ -26,6 +26,7 @@ Input.prototype.onKeyPressed = function(event) {
     case 8:
     case 27:
       this.callback("back");
+      event.preventDefault();
       break;
 
     default:
