@@ -1,14 +1,13 @@
-function CharacterSelectScreen(allCharacters, charactersSelectedCallback) {
+function CharacterSelectScreen(allCharacters) {
   this.allCharacters = allCharacters;
-  this.charactersSelectedCallback = charactersSelectedCallback;
 
   this.element = document.createElement("div");
   this.element.classList.add("character_selector_screen");
 
-  spySelector = new CharacterSelector(this.allCharacters, "Spy", ["You"], uiContainer.offsetWidth, this.charactersSelectedCallback);
-  doubleAgentSelector = new CharacterSelector(this.allCharacters, "Double Agent", ["Contact Him"], uiContainer.offsetWidth, this.charactersSelectedCallback);
-  seductionTargetSelector = new CharacterSelector(this.allCharacters, "Seduction Target", ["Seduce Him"], uiContainer.offsetWidth, this.charactersSelectedCallback);
-  ambassadorSelector = new CharacterSelector(this.allCharacters, "Ambassador", ["Bug Him"], uiContainer.offsetWidth, this.charactersSelectedCallback);
+  spySelector = new CharacterSelector(this.allCharacters, "Spy", ["You"], uiContainer.offsetWidth);
+  doubleAgentSelector = new CharacterSelector(this.allCharacters, "Double Agent", ["Contact Him"], uiContainer.offsetWidth);
+  seductionTargetSelector = new CharacterSelector(this.allCharacters, "Seduction Target", ["Seduce Him"], uiContainer.offsetWidth);
+  ambassadorSelector = new CharacterSelector(this.allCharacters, "Ambassador", ["Bug Him"], uiContainer.offsetWidth);
 
   this.selectors = [
     spySelector,

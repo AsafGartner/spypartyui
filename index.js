@@ -1,8 +1,8 @@
 var uiContainer = document.querySelector(".ui_container");
 
-levelSelector = new LevelSelector(levels, uiContainer.offsetWidth, function() { });
-missionSelectScreen = new MissionSelectScreen(levels, uiContainer.offsetWidth, function() {});
-characterSelectScreen = new CharacterSelectScreen(characters, function() {});
+levelSelector = new LevelSelector(levels, uiContainer.offsetWidth);
+missionSelectScreen = new MissionSelectScreen(levels, uiContainer.offsetWidth);
+characterSelectScreen = new CharacterSelectScreen(characters);
 waitingForSniperScreen = new WaitingForSniperScreen();
 
 uiContainer.appendChild(levelSelector.getElement());
@@ -12,10 +12,14 @@ uiContainer.appendChild(waitingForSniperScreen.getElement());
 
 onLevelSelectorFinished = function() {
   missionSelectScreen.setLevel(levelSelector.getCurrentLevel());
+  // update waiting for sniper screen?
 };
 onMissionSelectorFinished = function() {
+  // update character screen
+  // update waiting for sniper screen?
 };
 onCharacterSelectorFinished = function() {
+  // update waiting for sniper screen?
 };
 
 screens = [
@@ -33,8 +37,8 @@ onScreenFinishedCallbacks = [
 
 currentScreen = null;
 
-missionSelectScreen.setLevel(levels[9]);
-setCurrentScreen(1);
+//missionSelectScreen.setLevel(levels[9]);
+setCurrentScreen(0);
 
 document.querySelector(".previous_screen").addEventListener("click", function() {
   prevScreen();
@@ -63,11 +67,13 @@ inputHandler = new Input(function(input, event) {
 
 function setCurrentScreen(index) {
   currentScreenIndex = index;
+
   if (currentScreen) {
     currentScreen.getElement().classList.remove("show");
   }
   currentScreen = screens[currentScreenIndex];
   currentScreen.getElement().classList.add("show");
+
   if (currentScreenIndex < screens.length - 1) {
     document.querySelector(".next_screen").style.display = "block";
   } else {

@@ -1,12 +1,11 @@
-function CharacterSelector(characters, role, missionTextLines, width, characterSelectedCallback) {
+function CharacterSelector(characters, role, missionTextLines, width) {
   this.characters = characters;
   this.length = this.characters.length;
 
   this.role = role;
   this.missionTextLines = missionTextLines;
-  this.characterSelectedCallback = characterSelectedCallback;
 
-  this.infiniteScroller = new InfiniteScroller(this.onCharacterSelected.bind(this), this, width, 120);
+  this.infiniteScroller = new InfiniteScroller(this, width, 120);
 
   this.element = document.createElement("div");
   this.element.classList.add("character_selector");
@@ -20,10 +19,12 @@ CharacterSelector.prototype.getElement = function() {
 
 CharacterSelector.prototype.next = function() {
   this.infiniteScroller.next();
+  this.setMissionGender(this.characters[this.infiniteScroller.getSelectedItemIndex()].gender);
 };
 
 CharacterSelector.prototype.prev = function() {
   this.infiniteScroller.prev();
+  this.setMissionGender(this.characters[this.infiniteScroller.getSelectedItemIndex()].gender);
 };
 
 CharacterSelector.prototype.activate = function() {
@@ -53,11 +54,6 @@ CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter,
 
   element.style.opacity = -(distanceFromCenter/5)+1;
   return element;
-};
-
-CharacterSelector.prototype.onCharacterSelected = function(index) {
-  this.setMissionGender(this.characters[index].gender);
-  this.characterSelectedCallback(this.characters[index]);
 };
 
 CharacterSelector.prototype.renderElement = function() {

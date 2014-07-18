@@ -10,7 +10,7 @@ MissionSelector.prototype.getElement = function() {
 
 MissionSelector.prototype.setAvailableMissions = function(availableMissions) {
   this.availableMissions = availableMissions;
-  this.indexedList = new IndexedList(this.availableMissions.length, this.onIndexChanged.bind(this));
+  this.indexedList = new IndexedList(this.availableMissions.length);
   this.reset();
 };
 
@@ -66,8 +66,4 @@ MissionSelector.prototype.reset = function() {
   }
 
   this.setMissionIndex(0);
-};
-
-MissionSelector.prototype.onIndexChanged = function(index) {
-
 };

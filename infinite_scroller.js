@@ -1,6 +1,4 @@
 /*
- * selectionChangedCallback: will be called every time there's a new item in the center of the scroller
- *                           will receive 1 argument - the index of the item between [0...dataSource.length)
  * dataSource: {
  *   length: integer - number of different items in the dataSource
  *   getItemElement: function(index, distanceFromCenter, existingElement) -
@@ -10,8 +8,7 @@
  *                   a new element or modify the existing one.
  * }
  */
-function InfiniteScroller(selectionChangedCallback, dataSource, scrollerWidth, itemWidth) {
-  this.selectionChangedCallback = selectionChangedCallback;
+function InfiniteScroller(dataSource, scrollerWidth, itemWidth) {
   this.dataSource = dataSource;
   this.scrollerWidth = scrollerWidth;
   this.itemWidth = itemWidth;
@@ -40,7 +37,6 @@ InfiniteScroller.prototype.prev = function() {
 InfiniteScroller.prototype.setSelectionIndex = function(selectionIndex) {
   if (this.currentSelectionIndex != selectionIndex) {
     this.currentSelectionIndex = selectionIndex;
-    this.selectionChangedCallback(this.getSelectedItemIndex(this.currentSelectionIndex));
     if (this.animationId === undefined) {
       this.render();
     }

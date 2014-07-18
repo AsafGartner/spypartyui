@@ -1,7 +1,6 @@
-function IndexedList(length, loop, indexChangedCallback) {
+function IndexedList(length, loop) {
   this.length = length;
   this.loop = loop;
-  this.indexChangedCallback = indexChangedCallback;
   this.currentIndex = 0;
 }
 
@@ -22,9 +21,6 @@ IndexedList.prototype.setCurrentIndex = function(index) {
 
   if (index != this.currentIndex) {
     this.currentIndex = index;
-    if (this.indexChangedCallback) {
-      this.indexChangedCallback(this.currentIndex);
-    }
     return true;
   }
   return false;
