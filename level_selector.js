@@ -3,8 +3,7 @@ window.LevelSelector = function(levels, width) {
   this.levels = levels;
   this.length = this.levels.length;
 
-  this.element = document.createElement("div");
-  this.element.classList.add("level_selector");
+  this.element = DOMHelper.createDiv("level_selector");
 
   this.infiniteScroller = new InfiniteScroller(this, width, 760);
   this.element.appendChild(this.infiniteScroller.getElement());

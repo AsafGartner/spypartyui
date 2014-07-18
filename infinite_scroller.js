@@ -14,8 +14,7 @@ function InfiniteScroller(dataSource, scrollerWidth, itemWidth) {
   this.itemWidth = itemWidth;
   this.itemElements = [];
 
-  this.element = document.createElement("div");
-  this.element.classList.add("infinite_scroller");
+  this.element = DOMHelper.createDiv("infinite_scroller");
 
   this.currentSelectionIndex = 0;
   this.currentPosition = this.positionForIndex(this.currentSelectionIndex);

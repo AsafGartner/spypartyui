@@ -1,15 +1,30 @@
-function CharacterSelector(characters, role, missionTextLines, width) {
+function CharacterSelector(characters, role, missionText, width) {
   this.characters = characters;
   this.length = this.characters.length;
 
   this.role = role;
-  this.missionTextLines = missionTextLines;
+  this.missionText = missionText;
 
   this.infiniteScroller = new InfiniteScroller(this, width, 120);
 
-  this.element = document.createElement("div");
-  this.element.classList.add("character_selector");
-  this.renderElement();
+  this.element = DOMHelper.createTree({
+    "character_selector": {
+      "text_container": {
+        "character_role": {},
+        "mission_text_container": {
+          "mission_text": {}
+        }
+      },
+      "characters_container": {
+        "reticle": {}
+      }
+    }
+  })[0];
+
+  this.element.querySelector(".character_role").innerHTML = this.role;
+  this.element.querySelector(".mission_text").innerHTML = this.missionText;
+  this.element.querySelector(".characters_container").appendChild(this.infiniteScroller.getElement());
+
   this.setMissionGender(this.characters[0].gender);
 }
 
@@ -44,8 +59,7 @@ CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter,
   if (!element) {
     var character = this.characters[index];
 
-    var element = document.createElement("div");
-    element.classList.add("character_item");
+    var element = DOMHelper.createDiv("character_item");
 
     var image = document.createElement("img");
     image.src = character.imageUrl;
@@ -54,41 +68,6 @@ CharacterSelector.prototype.getItemElement = function(index, distanceFromCenter,
 
   element.style.opacity = -(distanceFromCenter/5)+1;
   return element;
-};
-
-CharacterSelector.prototype.renderElement = function() {
-  var textContainer = document.createElement("div");
-  textContainer.classList.add("text_container");
-
-  var roleElement = document.createElement("div");
-  roleElement.classList.add("character_role");
-  roleElement.innerHTML = this.role;
-  textContainer.appendChild(roleElement);
-
-  var missionTextContainer = document.createElement("div");
-  missionTextContainer.classList.add("mission_text_container");
-
-  for (var i = 0; i < this.missionTextLines.length; ++i) {
-    var missionText = document.createElement("div");
-    missionText.classList.add("mission_text");
-    missionText.innerHTML = this.missionTextLines[i];
-    missionTextContainer.appendChild(missionText);
-  }
-
-  textContainer.appendChild(missionTextContainer);
-
-  this.element.appendChild(textContainer);
-
-  var charactersContainer = document.createElement("div");
-  charactersContainer.classList.add("characters_container");
-
-  var reticle = document.createElement("div");
-  reticle.classList.add("reticle");
-  charactersContainer.appendChild(reticle);
-
-  charactersContainer.appendChild(this.infiniteScroller.getElement());
-
-  this.element.appendChild(charactersContainer);
 };
 
 CharacterSelector.prototype.setMissionGender = function(gender) {

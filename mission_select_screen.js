@@ -1,28 +1,20 @@
 function MissionSelectScreen() {
-  this.element = document.createElement("div");
-  this.element.classList.add("mission_select_screen");
+  this.element = DOMHelper.createTree({
+    "mission_select_screen": {
+      "mission_select_container": {
+        "game_type_container": {
+          "game_type": {},
+          "game_type_description": {}
+        },
+        "level_container": {},
+        "mission_container": {}
+      }
+    }
+  })[0];
 
-  var missionSelectContainer = document.createElement("div");
-  missionSelectContainer.classList.add("mission_select_container");
-  this.element.appendChild(missionSelectContainer);
-
-  var gameTypeContainer = document.createElement("div");
-  gameTypeContainer.classList.add("game_type_container");
-  missionSelectContainer.appendChild(gameTypeContainer);
-
-  var gameType = document.createElement("div");
-  gameType.classList.add("game_type");
-  gameType.innerHTML = "Game Type: Any 3 of 5";
-  gameTypeContainer.appendChild(gameType);
-
-  var gameTypeDescription = document.createElement("div");
-  gameTypeDescription.classList.add("game_type_description");
-  gameTypeDescription.innerHTML = "The Spy must complete any 3 missions out of a total of 5 avaiable missions. Missions can be completed in any order.";
-  gameTypeContainer.appendChild(gameTypeDescription);
-
-  this.levelContainer = document.createElement("div");
-  this.levelContainer.classList.add("level_container");
-  missionSelectContainer.appendChild(this.levelContainer);
+  this.element.querySelector(".game_type").innerHTML = "Game Type: Any 3 of 5";
+  this.element.querySelector(".game_type_description").innerHTML =  "The Spy must complete any 3 missions out of a total of 5 avaiable missions. Missions can be completed in any order.";
+  this.levelContainer = this.element.querySelector(".level_container");
 }
 
 MissionSelectScreen.prototype.getElement = function() {
