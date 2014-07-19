@@ -2,7 +2,7 @@ function MissionToggle(mission) {
   this.numStates = 3;
   this.mission = mission;
 
-  this.indexedList = new IndexedList(this.numStates, false, this.onStateChanged.bind(this));
+  this.indexedList = new IndexedList(this.numStates, true, this.onStateChanged.bind(this));
 
   this.element = DOMHelper.createTree({
     "mission_toggle": {
