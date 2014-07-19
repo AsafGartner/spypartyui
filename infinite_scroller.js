@@ -8,10 +8,11 @@
  *                   a new element or modify the existing one.
  * }
  */
-function InfiniteScroller(dataSource, scrollerWidth, itemWidth) {
+function InfiniteScroller(dataSource, scrollerWidth, itemWidth, itemSelectedCallback) {
   this.dataSource = dataSource;
   this.scrollerWidth = scrollerWidth;
   this.itemWidth = itemWidth;
+  this.itemSelectedCallback = itemSelectedCallback;
   this.itemElements = [];
 
   this.element = DOMHelper.createDiv("infinite_scroller");
@@ -63,7 +64,12 @@ InfiniteScroller.prototype.setSelectedItemIndex = function(targetIndex) {
   }
 
   var distance = targetIndex - currentIndex;
-  this.setSelectionIndex(this.currentSelectionIndex + distance);
+  if (distance != 0) {
+    this.setSelectionIndex(this.currentSelectionIndex + distance);
+    return true;
+  } else {
+    return false;
+  }
 };
 
 InfiniteScroller.prototype.getItemIndex = function(index) {
@@ -112,7 +118,7 @@ InfiniteScroller.prototype.getItemElement = function(index, distanceFromCenter) 
       this.element.removeChild(this.itemElements[index]);
     }
     element.classList.add("infinite_scroller_item");
-    element.addEventListener("click", this.setSelectedItemIndex.bind(this, this.getItemIndex(index)));
+    element.addEventListener("click", this.onItemClicked.bind(this, this.getItemIndex(index)));
     this.itemElements[index] = element;
     this.element.appendChild(element);
   }
@@ -122,4 +128,11 @@ InfiniteScroller.prototype.getItemElement = function(index, distanceFromCenter) 
 InfiniteScroller.prototype.distanceFromCenter = function(position) {
   var centerPos = this.scrollerWidth/2 - this.itemWidth/2;
   return (Math.abs(centerPos - position) / this.itemWidth);
-}
+};
+
+InfiniteScroller.prototype.onItemClicked = function(index) {
+  var changed = this.setSelectedItemIndex(index);
+  if (!changed && this.itemSelectedCallback) {
+    this.itemSelectedCallback(index);
+  }
+};

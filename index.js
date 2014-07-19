@@ -1,6 +1,8 @@
 var uiContainer = document.querySelector(".ui_container");
 
-levelSelector = new LevelSelector(levels, uiContainer.offsetWidth);
+levelSelector = new LevelSelector(levels, uiContainer.offsetWidth, function() {
+  nextScreen();
+});
 missionSelectScreen = new MissionSelectScreen(levels, uiContainer.offsetWidth);
 characterSelectScreen = new CharacterSelectScreen(characters);
 waitingForSniperScreen = new WaitingForSniperScreen();

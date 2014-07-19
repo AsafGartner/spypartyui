@@ -1,11 +1,12 @@
 // levels is an array of { imageUrl: "url", name: "name", numGuests: 10, time: "3 Minutes", missions: ["mission1", "mission2"] }
-window.LevelSelector = function(levels, width) {
+window.LevelSelector = function(levels, width, levelSelectedCallback) {
   this.levels = levels;
   this.length = this.levels.length;
+  this.levelSelectedCallback = levelSelectedCallback;
 
   this.element = DOMHelper.createDiv("level_selector");
 
-  this.infiniteScroller = new InfiniteScroller(this, width, 760);
+  this.infiniteScroller = new InfiniteScroller(this, width, 760, this.onItemSelected.bind(this));
   this.element.appendChild(this.infiniteScroller.getElement());
 };
 
@@ -56,4 +57,10 @@ LevelSelector.prototype.getItemElement = function(index, distanceFromCenter, exi
 
 LevelSelector.prototype.getElement = function() {
   return this.element;
+};
+
+LevelSelector.prototype.onItemSelected = function(index) {
+  if (this.levelSelectedCallback) {
+    this.levelSelectedCallback(this.getCurrentLevel());
+  }
 };
