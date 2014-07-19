@@ -38,9 +38,9 @@ onScreenFinishedCallbacks = [
 
 currentScreen = null;
 
-missionSelectScreen.setLevel(levels[9]);
-missionSelectScreen.setAvailableMissions(levels[1].missions);
-setCurrentScreen(1);
+//missionSelectScreen.setLevel(levels[9]);
+//missionSelectScreen.setAvailableMissions(levels[1].missions);
+setCurrentScreen(0);
 
 document.querySelector(".previous_screen").addEventListener("click", function() {
   prevScreen();
