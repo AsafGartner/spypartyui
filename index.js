@@ -12,6 +12,7 @@ uiContainer.appendChild(waitingForSniperScreen.getElement());
 
 onLevelSelectorFinished = function() {
   missionSelectScreen.setLevel(levelSelector.getCurrentLevel());
+  missionSelectScreen.setAvailableMissions(levelSelector.getCurrentLevel().missions);
   // update waiting for sniper screen?
 };
 onMissionSelectorFinished = function() {
@@ -37,8 +38,9 @@ onScreenFinishedCallbacks = [
 
 currentScreen = null;
 
-//missionSelectScreen.setLevel(levels[9]);
-setCurrentScreen(0);
+missionSelectScreen.setLevel(levels[9]);
+missionSelectScreen.setAvailableMissions(levels[1].missions);
+setCurrentScreen(1);
 
 document.querySelector(".previous_screen").addEventListener("click", function() {
   prevScreen();

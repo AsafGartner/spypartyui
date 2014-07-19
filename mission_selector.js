@@ -10,8 +10,18 @@ MissionSelector.prototype.getElement = function() {
 
 MissionSelector.prototype.setAvailableMissions = function(availableMissions) {
   this.availableMissions = availableMissions;
-  this.indexedList = new IndexedList(this.availableMissions.length);
+  this.indexedList = new IndexedList(this.availableMissions.length, false, this.onIndexChanged.bind(this));
   this.reset();
+};
+
+MissionSelector.prototype.getSelectedMissions = function() {
+  var selectedMissions = [];
+  for (var i = 0; i < this.missionToggles.length; ++i) {
+    if (this.missionToggles[i].getState() > 0) {
+      selectedMissions.push(this.missionToggles[i].getMission());
+    }
+  }
+  return selectedMissions;
 };
 
 MissionSelector.prototype.prev = function() {
@@ -20,6 +30,20 @@ MissionSelector.prototype.prev = function() {
 
 MissionSelector.prototype.next = function() {
   return this.indexedList.next();
+};
+
+MissionSelector.prototype.focus = function() {
+  var missionToggle = this.missionToggles[this.indexedList.getCurrentIndex()];
+  if (missionToggle) {
+    missionToggle.focus();
+  }
+};
+
+MissionSelector.prototype.blur = function() {
+  var missionToggle = this.missionToggles[this.indexedList.getCurrentIndex()];
+  if (missionToggle) {
+    missionToggle.blur();
+  }
 };
 
 MissionSelector.prototype.setMissionIndex = function(index) {
@@ -49,7 +73,7 @@ MissionSelector.prototype.handleInput = function(input) {
     case "select":
       var activeMissionToggle = this.missionToggles[this.indexedList.getCurrentIndex()];
       if (activeMissionToggle) {
-        return activeMissionToggle.next();
+        return activeMissionToggle.toggle();
       }
       break;
   }
@@ -66,4 +90,14 @@ MissionSelector.prototype.reset = function() {
   }
 
   this.setMissionIndex(0);
+};
+
+MissionSelector.prototype.onIndexChanged = function(index) {
+  for (var i = 0; i < this.missionToggles.length; ++i) {
+    if (i == index) {
+      this.missionToggles[i].focus();
+    } else {
+      this.missionToggles[i].blur();
+    }
+  }
 };

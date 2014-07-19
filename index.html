@@ -5,10 +5,13 @@
     <script src="image_data.js"></script>
     <script src="levels.js"></script>
     <script src="characters.js"></script>
+    <script src="indexed_list.js"></script>
     <script src="infinite_scroller.js"></script>
     <script src="input.js"></script>
     <script src="level_element.js"></script>
     <script src="level_selector.js"></script>
+    <script src="mission_toggle.js"></script>
+    <script src="mission_selector.js"></script>
     <script src="mission_select_screen.js"></script>
     <script src="character_selector.js"></script>
     <script src="character_select_screen.js"></script>
@@ -220,7 +223,9 @@
       }
 
       .mission_select_screen .mission_select_container {
-        width: 680px;
+        position: relative;
+        width: 700px;
+        height: 100%;
         margin: 0 auto;
       }
 
@@ -264,6 +269,79 @@
       .mission_select_screen .level .level_details {
         font-size: 20px;
       }
+
+      .mission_select_screen .mission_container {
+        background-color: #1b1f3a;
+        position: absolute;
+        bottom: 50px;
+        right: 0;
+        width: 250px;
+        height: 320px;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle {
+        font-size: 24px;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle .state_container {
+        display: inline-block;
+        width: 30px;
+        height: 10px;
+        background-color: grey;
+        padding: 3px;
+        position: relative;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle .state_container .state_indicator {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 3px;
+        transition: left 0.1s ease-in-out, background-color 0.1s ease-in-out, color 0.1s ease-in-out;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_0 .state_container .state_indicator {
+        left: 3px;
+        background-color: red;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_1 .state_container .state_indicator {
+        left: 13px;
+        background-color: yellow;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_2 .state_container .state_indicator {
+        left: 23px;
+        background-color: #00ff00;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle .mission_name {
+        transition: color 0.1s ease-in-out;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_0 .mission_name {
+        color: #81874b;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_1 .mission_name {
+        color: #f3fd8f;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.state_2 .mission_name {
+        color: #f3fd8f;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle .mission_name {
+        display: inline-block;
+        margin-left: 10px;
+      }
+
+      .mission_select_screen .mission_container .mission_toggle.focus {
+        background-color: #3f3d68;
+      }
+
 
       .character_selector {
         position: relative;
